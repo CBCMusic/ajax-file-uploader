@@ -53,8 +53,8 @@ control in your own aspx pages.
 should be easy to remove.
 - with our own usage of this script, we don't just blindly upload the file to a folder (certainly not one that's publicly
 accessible). So you may find that either moving the file to a temporary location may be in order, or adding MIME-type
-validation into the C#. This was unnecessary for our purposes, but we'd appreciate the fork. ;-)
-- The CSS and JS is really pretty basic. Edit away.
+validation into the C#. This was unnecessary for our purposes (but we'd appreciate the code, if you add it!)
+- The CSS and JS is really pretty straightforward. Edit away.
 
 ### Other notes
 - I had to make a small change to [Simple-Ajax-Uploader](https://github.com/LPology/Simple-Ajax-Uploader) to allow
@@ -68,8 +68,7 @@ naturally I only wanted them to be included once. That's why the optional `OmitI
 control exists. Doesn't hurt to omit it, but for people as anal as myself it's nice to have. :)
 
 ###License 
-
 MIT. See license.txt in this folder.
 
-
-- Ben Keen [@vancouverben](https://twitter.com/vancouverben)
+- Ahmed Khalil, design
+- Ben Keen, code [@vancouverben](https://twitter.com/vancouverben)
