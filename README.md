@@ -17,7 +17,7 @@ no longer supported and all other solutions we looked into were too pricey or di
 that it showed a progress bar to the user to clearly show them what was happening.
 
 ### Screenshot
-![Example](http://www.formtools.org/external/example.png "Example")
+![Example](http://www.formtools.org/external/example2.png "Example")
 
 ### Features
 - Lets you any number of file upload fields to your pages (not necessarily in a form)
