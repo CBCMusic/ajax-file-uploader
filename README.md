@@ -20,7 +20,7 @@ that it showed a progress bar to the user to clearly show them what was happenin
 ![Example](http://www.formtools.org/external/example2.png "Example")
 
 ### Features
-- Lets you any number of file upload fields to your pages (not necessarily in a form)
+- Lets you add any number of file upload fields to your pages (not necessarily in a form)
 - max file sizes as customizable (on both client and server) and permitted file types to be uploaded.
 - shows a progress bar (CSS) to the user, or downgrades nicely to a simple loading swirly icon (IE9 and below)
 - lets you abort an upload before it's complete
@@ -32,6 +32,7 @@ that it showed a progress bar to the user to clearly show them what was happenin
 There are two classes: `FileUploadField` and `FileUploader`. The former is a user control, which, when included in your
 page will output the necessary markup and javascript; the latter handles the actual form POSTs, moves the file to the
 appropriate location on the server, performs validation and checks for filename collisions, and returns the new filename
+for inclusion in a form post (or whatever you want).
 
 ### How to use
 To get it going, do the following:
@@ -61,11 +62,14 @@ for the abort() function. Other than that it's right out the box.
 - IE 9 and early SUCK. I know I'm not saying anything earth-shatteringly new there, but I found I had to return the
 new filename in plain text, rather than JSON because IE would choke. Hence the elaborate checking in the JS for
 /^filename:/.
+- I'm relatively new to C# so was surprised there wasn't a way to detect whether a user control was already
+included in the page. Since I wanted the user control to be self-contained, I included external CSS + JS there, however,
+naturally I only wanted them to be included once. That's why the optional `OmitIncludes` attribute for the `FileUploadField`
+control exists. Doesn't hurt to omit it, but for people as anal as myself it's nice to have. :)
 
 ###License 
 
 MIT. See license.txt in this folder.
-
 
 
 - Ben Keen [@vancouverben](https://twitter.com/vancouverben)
