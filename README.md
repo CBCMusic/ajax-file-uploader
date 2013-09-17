@@ -2,6 +2,7 @@
 
 ### Overview
  
+<span style="float:right">![Example](http://www.formtools.org/external/example.png "Example")</span>
 This repo contains a standalone C# user control for adding Ajax file upload fields with progress bars to your web form. It
 contains a Visual Studio .NET (2012) solution with all the necessary files. It was developed on .NET 4.5, but should run on
 4.0 as well.
@@ -23,10 +24,8 @@ that it showed a progress bar to the user to clearly show them what was happenin
 - max file sizes as customizable (on both client and server) and permitted file types to be uploaded.
 - shows a progress bar (CSS) to the user, or downgrades nicely to a simple loading swirly icon (IE9 and below)
 - lets you abort an upload before it's complete
--
 - optional additional data can to be sent along with the file upload request
 - Provides simple client-side validation for the user to (and throws errors on the server)
-
 
 
 ### How it works
