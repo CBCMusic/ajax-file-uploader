@@ -1,2 +1,3 @@
 fileUploader/bin/*
 fileUploader/obj/*
+.idea*
