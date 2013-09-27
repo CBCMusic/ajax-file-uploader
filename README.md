@@ -58,7 +58,7 @@ validation into the C#. This was unnecessary for our purposes (but we'd apprecia
 
 ### Other notes
 - I had to make a small change to [Simple-Ajax-Uploader](https://github.com/LPology/Simple-Ajax-Uploader) to allow
-for the abort() function. Other than that it's right out the box.
+for the abort() function. Other than that it's right out the box. It's an older version, but works perfectly so far.
 - IE 9 and early SUCK. I know I'm not saying anything earth-shatteringly new there, but I found I had to return the
 new filename in plain text, rather than JSON because IE would choke. Hence the elaborate checking in the JS for
 /^filename:/.
@@ -66,6 +66,12 @@ new filename in plain text, rather than JSON because IE would choke. Hence the e
 included in the page. Since I wanted the user control to be self-contained, I included external CSS + JS there, however,
 naturally I only wanted them to be included once. That's why the optional `OmitIncludes` attribute for the `FileUploadField`
 control exists. Doesn't hurt to omit it, but for people as anal as myself it's nice to have. :)
+- During our own implementation of this script, we ran into a problem with old IE when the iframe document belonged to a
+different domain than the parent. Ordinarily this shouldn't occur, but in our setup we were explicitly changing the domain
+for a reason I won't get into. To get around it, I had to alter the response from the FileUploader to return HTML, with
+a JS snipped that set the domain to the appropriate value. I decided not to include that fix in this repo because it's
+kludgy and I doubt it would be of any use to many people.
+
 
 ###License 
 MIT. See license.txt in this folder.
