@@ -3,12 +3,12 @@
 <% if (!OmitIncludes) { %>
 <script src="../js/SimpleAjaxUploader.js"></script>
 <script src="../js/fileUploader.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <link href="../css/fileUploader.css" rel="stylesheet" />
 <% } %>
 
 <script>
-document.observe("dom:loaded", function() {
+$(function() {
     fileUploader.create({
         guid: "<%=GUID%>",
         debug: <%=Debug%>,
