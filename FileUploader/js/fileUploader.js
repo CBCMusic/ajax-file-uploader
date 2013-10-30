@@ -1,17 +1,23 @@
-﻿var fileUploader = {  
+/**
+ * sebrojas14 (30/10/2013): 
+ *  - ported from prototype to jquery
+ *  - added nice units to large files error message (KB and MB)
+ */
+var fileUploader = {
     MSG_SUCCESS: "success",
     MSG_ERROR: "error",
     MSG_BLANK: "blank",
-    GENERAL_ERROR: "<b>ERROR</b><br />Sorry, there was an error uploading your file.",
+    GENERAL_ERROR: "<b>ERROR</b><br />Ocurrió un error subiendo el archivo",
 
     /**
      * Creates our uploader with all the appropriate settings.
      */
-    create: function(params) {
+    create: function (params) {
         var uploadFieldID  = "uploadField_" + params.guid;
         var uploadButtonID = "uploadButton_" + params.guid;
         var cancelButtonID = "cancelButton_" + params.guid;
-        var progressBarEl  = document.getElementById("progressBar_" + params.guid);
+        var buttonBrowseValue = $('#' + uploadButtonID).attr("value");
+        var progressBarEl  = $("#progressBar_" + params.guid);
         var supportsXhr = fileUploader.browserSupportsXhrFileUpload();
 
         var config = {
@@ -40,11 +46,11 @@
             },
 
             onProgress: function(percent) {
-                $(uploadButtonID).writeAttribute("value", percent + "%");
+                $('#' + uploadButtonID).attr("value", percent + "%");
             },
 
             onComplete: function(oldFilename, response) {
-                fileUploader.resetUploadButton(uploadButtonID);
+                fileUploader.resetUploadButton(uploadButtonID, buttonBrowseValue);
                 fileUploader.disableCancelButton(cancelButtonID);
 
                 if (!supportsXhr) {
@@ -70,10 +76,10 @@
                     // display the original filename - not the new one. They don't need to know about that
                     fileUploader.showMessage({
                         uploadFieldID: uploadFieldID,
-                        msg: "<b>Upload Complete</b><br />" + this.originalFilename,
+                        msg: "<b>El archivo se adjuntó correctamente</b><br />" + this.originalFilename,
                         msgType: fileUploader.MSG_SUCCESS
                     });
-                    $("uploadFieldNewFile_" + params.guid).writeAttribute("value", newFilename);
+                    $("#uploadFieldNewFile_" + params.guid).val(newFilename).trigger('change');;
 
                     // for old IE. This ensures the row goes green
                     fileUploader.setCompleteProgressBar(progressBarEl);
@@ -81,14 +87,14 @@
             },
 
             onError: function(filename, errorType, response, manuallyAborted) {
-                fileUploader.resetUploadButton(uploadButtonID);
+                fileUploader.resetUploadButton(uploadButtonID, buttonBrowseValue);
                 fileUploader.disableCancelButton(cancelButtonID);
                 fileUploader.resetProgressBar(progressBarEl);
 
                 var msg = fileUploader.GENERAL_ERROR;
                 var msgType = fileUploader.MSG_ERROR;
                 if (manuallyAborted) {
-                    msg = "The upload was cancelled.";
+                    msg = "La subida del archvio fue cancelada.";
                     msgType = fileUploader.MSG_BLANK;
                 }
 
@@ -101,9 +107,14 @@
                 });
             },
             onSizeError: function() {
-                
-                // TODO this could be improved to show a more human friendly file size
-                var msg = "<b>ERROR: FILE TOO LARGE!</b><br />Please choose a file smaller than " + params.maxFileSize + "KB";
+                var maxSize = params.maxFileSize;
+                var sizeUnit = " KB";
+                //For files sized more than 1024 KB, should display size in MB
+                if (maxSize > 1024) {
+                    maxSize = maxSize / 1024;
+                    var sizeUnit = " MB";
+                }
+                var msg = "<b>ERROR: FILE TOO LARGE!</b><br />Please choose a file smaller than " + maxSize + sizeUnit;
                 fileUploader.showMessage({
                     uploadFieldID: uploadFieldID,
                     msg: msg,
@@ -121,9 +132,8 @@
 
         var uploader = new ss.SimpleUpload(config);
 
-        $("cancelButton_" + params.guid).observe("click", function (e) {
-            var element = Event.element(e);
-            if (element.hasClassName("uploadFieldCancelEnabled")) {
+        $("#cancelButton_" + params.guid).click(function (e) {
+            if ($(this).hasClass("uploadFieldCancelEnabled")) {
                 uploader.abort();
             }
         });
@@ -131,40 +141,40 @@
         return uploader;
     },
 
-    showMessage: function(params) {
-        var loadingRow = $(params.uploadFieldID).down(".uploadFieldLoadingRow");
-        
+    showMessage: function (params) {
+        var loadingRow = $('#' + params.uploadFieldID).find(".uploadFieldLoadingRow");
+
         if (params.msgType === fileUploader.MSG_SUCCESS) {
-            loadingRow.removeClassName("uploadFieldError");
+            loadingRow.removeClass("uploadFieldError");
         } else if (params.msgType === fileUploader.MSG_ERROR) {
-            loadingRow.addClassName("uploadFieldError");
+            loadingRow.addClass("uploadFieldError");
         }
 
-        $(params.uploadFieldID).down(".uploadFieldMsg").update(params.msg);
+        $('#' + params.uploadFieldID).find(".uploadFieldMsg").html(params.msg);
         if (params.debug) {
             console.log("fileUploader debug: ", params.debugData);
         }
     },
 
-    resetUploadButton: function(uploadFieldID) {
-        $(uploadFieldID).writeAttribute("value", "BROWSE");
+    resetUploadButton: function (uploadFieldID, buttonBrowseValue) {
+        $('#' + uploadFieldID).attr("value", buttonBrowseValue);
     },
     
     resetProgressBar: function(el) {
-        $(el).setStyle({ width: "0%" });
+        el.css('width', "0%");
     },
 
     // for old IE
     setCompleteProgressBar: function (el) {
-        $(el).setStyle({ width: "100%" });
+        el.css('width', "100%");
     },
     
     enableCancelButton: function(buttonID) {
-        $(buttonID).addClassName("uploadFieldCancelEnabled");
+        $('#' + buttonID).addClass("uploadFieldCancelEnabled");
     },
 
     disableCancelButton: function(buttonID) {
-        $(buttonID).removeClassName("uploadFieldCancelEnabled");
+        $('#' + buttonID).removeClass("uploadFieldCancelEnabled");
     },
     
     browserSupportsXhrFileUpload: function() {
@@ -178,10 +188,10 @@
     },
     
     showLoadingIcon: function(uploadButtonID) {
-        $(uploadButtonID).addClassName("uploadFieldLoadingIcon");
+        $('#' + uploadButtonID).addClass("uploadFieldLoadingIcon");
     },
     
     hideLoadingIcon: function(uploadButtonID) {
-        $(uploadButtonID).removeClassName("uploadFieldLoadingIcon");
+        $('#' + uploadButtonID).removeClass("uploadFieldLoadingIcon");
     }
 };
