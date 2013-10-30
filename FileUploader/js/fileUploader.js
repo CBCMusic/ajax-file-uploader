@@ -7,7 +7,7 @@ var fileUploader = {
     MSG_SUCCESS: "success",
     MSG_ERROR: "error",
     MSG_BLANK: "blank",
-    GENERAL_ERROR: "<b>ERROR</b><br />Ocurrió un error subiendo el archivo",
+    GENERAL_ERROR: "<b>ERROR</b><br />Sorry, there was an error uploading your file.",
 
     /**
      * Creates our uploader with all the appropriate settings.
@@ -76,7 +76,7 @@ var fileUploader = {
                     // display the original filename - not the new one. They don't need to know about that
                     fileUploader.showMessage({
                         uploadFieldID: uploadFieldID,
-                        msg: "<b>El archivo se adjuntó correctamente</b><br />" + this.originalFilename,
+                        msg: "<b>Upload Complete</b><br />" + this.originalFilename,
                         msgType: fileUploader.MSG_SUCCESS
                     });
                     $("#uploadFieldNewFile_" + params.guid).val(newFilename).trigger('change');;
@@ -94,7 +94,7 @@ var fileUploader = {
                 var msg = fileUploader.GENERAL_ERROR;
                 var msgType = fileUploader.MSG_ERROR;
                 if (manuallyAborted) {
-                    msg = "La subida del archvio fue cancelada.";
+                    msg = "The upload was cancelled.";
                     msgType = fileUploader.MSG_BLANK;
                 }
 
@@ -155,7 +155,7 @@ var fileUploader = {
             console.log("fileUploader debug: ", params.debugData);
         }
     },
-
+    /*Now receives buttonBrowseValue for restore valu to the one used in FileUploadField.ascx*/
     resetUploadButton: function (uploadFieldID, buttonBrowseValue) {
         $('#' + uploadFieldID).attr("value", buttonBrowseValue);
     },
