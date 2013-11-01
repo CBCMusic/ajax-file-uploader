@@ -46,7 +46,14 @@ var fileUploader = {
             },
 
             onProgress: function(percent) {
-                $('#' + uploadButtonID).attr("value", percent + "%");
+                //Detects IE7-
+                var isIE7orLess = document.all && !document.querySelector;
+
+                //Prevents text "0%" appears over loading image in IE7-
+                if (!isIE7orLess)
+                    $('#' + uploadButtonID).attr("value", percent + "%");
+                else
+                    $('#' + uploadButtonID).attr("value", "");
             },
 
             onComplete: function(oldFilename, response) {
