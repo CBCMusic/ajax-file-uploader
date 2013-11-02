@@ -49,8 +49,6 @@ Check out the `Default.aspx` file for a working demo. That illustrates how you c
 control in your own aspx pages.
 
 ### Things you'll probably want to customize
-- our site still uses Prototype JS, so when we developed this, for the (few lines) of DOM stuff we used Prototype as well. It
-should be easy to remove.
 - with our own usage of this script, we don't just blindly upload the file to a folder (certainly not one that's publicly
 accessible). So you may find that either moving the file to a temporary location may be in order, or adding MIME-type
 validation into the C#. This was unnecessary for our purposes (but we'd appreciate the code, if you add it!)

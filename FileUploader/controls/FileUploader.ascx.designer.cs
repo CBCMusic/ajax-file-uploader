@@ -8,8 +8,6 @@
 //------------------------------------------------------------------------------
 
 namespace FileUploader.controls {
-    
-    
     public partial class FileUploader {
     }
 }
