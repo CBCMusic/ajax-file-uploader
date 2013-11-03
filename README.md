@@ -20,13 +20,13 @@ that it showed a progress bar to the user to clearly show them what was happenin
 ![Example](http://www.formtools.org/external/example2.png "Example")
 
 ### Features
-- Lets you add any number of file upload fields to your pages (not necessarily in a form)
+- Lets you add any number of file upload fields to your pages (not necessarily in a form).
 - max file sizes as customizable (on both client and server) and permitted file types to be uploaded.
-- shows a progress bar (CSS) to the user, or downgrades nicely to a simple loading swirly icon (IE9 and below)
-- lets you abort an upload before it's complete
-- optional additional data can to be sent along with the file upload request
-- Provides simple client-side validation for the user to (and throws errors on the server)
-- Filename collision detection included (C#)
+- shows a progress bar (CSS) to the user, or downgrades nicely to a simple loading swirly icon (IE9 and below).
+- lets you abort an upload before it's complete.
+- optional additional data can to be sent along with the file upload request.
+- Provides simple client-side validation for the user to (and throws errors on the server).
+- Filename collision detection included (C#).
 
 ### How it works
 There are two classes: `FileUploadField` and `FileUploader`. The former is a user control, which, when included in your
@@ -51,7 +51,7 @@ Check out the `Default.aspx` file for a working demo. That illustrates how you c
 control in your own aspx pages.
 
 ### Things you'll probably want to customize
-- with our own usage of this script, we don't just blindly upload the file to a folder (certainly not one that's publicly
+- With our own use of this script, we don't just blindly upload the file to a folder (certainly not one that's publicly
 accessible). So you may find that either moving the file to a temporary location may be in order, or adding MIME-type
 validation into the C#. This was unnecessary for our purposes (but we'd appreciate the code, if you add it!)
 - The CSS and JS is really pretty straightforward. Edit away.
@@ -65,7 +65,8 @@ new filename in plain text, rather than JSON because IE would choke. Hence the e
 - I'm relatively new to C# so was surprised there wasn't a way to detect whether a user control was already
 included in the page. Since I wanted the user control to be self-contained, I included external CSS + JS there, however,
 naturally I only wanted them to be included once. That's why the optional `OmitIncludes` attribute for the `FileUploadField`
-control exists. Doesn't hurt to omit it, but for people as anal as myself it's nice to have. :)
+control exists. Doesn't hurt to omit it - browsers will only ever download the identical resource once - but for people
+as anal as myself it's nice to have the option. :)
 - During our own implementation of this script, we ran into a problem with old IE when the iframe document belonged to a
 different domain than the parent. Ordinarily this shouldn't occur, but in our setup we were explicitly changing the domain
 for a reason I won't get into. To get around it, I had to alter the response from the FileUploader to return HTML, with
