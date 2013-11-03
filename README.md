@@ -35,7 +35,9 @@ appropriate location on the server, performs validation and checks for filename 
 for inclusion in a form post (or whatever you want).
 
 ### How to use
+
 To get it going, do the following:
+
 1. Update `/FileUploader/controls/FileUploader.ascx.cs` for the appropriate default upload folder in your environment.
 This can be customized for each particular file upload field / form, but having a default can be handy.
 2. Update `/FileUploader/controls/FileUploadField.ascx.cs` for the default uploader aspx file. In the source code, it defaults
