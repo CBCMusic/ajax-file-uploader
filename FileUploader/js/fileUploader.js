@@ -164,9 +164,9 @@ var fileUploader = {
             console.log("fileUploader debug: ", params.debugData);
         }
     },
-    /*Now receives buttonBrowseValue for restore valu to the one used in FileUploadField.ascx*/
+    /*Now receives buttonBrowseValue for restore value to the one used in FileUploadField.ascx*/
     resetUploadButton: function(uploadFieldID, buttonBrowseValue) {
-        $(uploadFieldID).attr("value", buttonBrowseValue);
+        $(uploadFieldID).val(buttonBrowseValue);
     },
     
     resetProgressBar: function(el) {
